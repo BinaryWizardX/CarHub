@@ -1,14 +1,21 @@
 'use client';
-import React,{useState, useEffect, Suspense} from 'react'
+import React,{useState, useEffect, Suspense, useMemo} from 'react'
 import { fetchCarsData } from '@/UtilFunctions'
 import { carFilters,car } from '@/types'
 import { CarCard,CarDetails, CarModal } from '.';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-async function fetchCarsDataFiltered(){
+async function fetchCarsDataFiltered(carFiltersobj: carFilters){
 
 
-    const response = await fetchCarsData({ carFilter:  { make:"Honda" } });
+    const response = await fetchCarsData({ carFilter:  { 
+        manufacturer: carFiltersobj.manufacturer,
+        year: carFiltersobj.year,
+        model: carFiltersobj.model,
+        limit: carFiltersobj.limit,
+        fuel: carFiltersobj.fuel,
+        make: carFiltersobj.make
+    } });
     let carsData: car[] = [];
     if (response) {
       carsData = response.data;
@@ -24,14 +31,22 @@ async function fetchCarsDataFiltered(){
 
     const searchParams = useSearchParams()
 
-    const carFiltersobj = {
-        manufacturer: searchParams.get('Manufacturer') || '',
-        year: Number(searchParams.get('year')) || undefined, // Handle non-numeric years
-        model: searchParams.get('modal') || '',
+    const carFiltersobj = useMemo(() => ({
+        year: Number(searchParams.get('year')) || 2022, // Handle non-numeric years
+        model: searchParams.get('model') || '',
         limit: Number(searchParams.get('limit')) || 10, // Default limit
         fuel: searchParams.get('fuel') || '',
-        make: searchParams.get('make') || '', // Include 'make' as requested
-      };
+        make: searchParams.get('make') || 'Honda', // Include 'make' as requested
+    }), [
+        
+        searchParams.get('year'),
+        searchParams.get('model'),
+        searchParams.get('limit'),
+        searchParams.get('fuel'),
+        searchParams.get('make'),
+    ]);
+
+    
       
       
 
@@ -48,8 +63,13 @@ async function fetchCarsDataFiltered(){
     useEffect(() => {
         async function fetchData() {
 
-            const response = await fetchCarsDataFiltered();
+            
+
+            const response = await fetchCarsDataFiltered(carFiltersobj);
+            console.log(response)
             setCarsData(response)
+
+            
 
             /*
             const response = await fetchCarsData({ carFilter: { model: "corolla" } });
@@ -59,7 +79,7 @@ async function fetchCarsDataFiltered(){
             */
         }
         fetchData();
-      }, []);
+      }, [carFiltersobj]);
 
 
 

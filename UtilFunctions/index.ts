@@ -9,19 +9,19 @@ export const fetchCarsData = async({carFilter}:props)=>{
     console.log("Function called")
 
     const {year,fuel,limit,manufacturer,model,make} = carFilter
+
+
     const headers = {
 
-    'X-RapidAPI-Key': '7f63d4e1c3msh2c585464ac1f73ap101165jsn1d51819beb11',
+    'X-RapidAPI-Key': '8774f9c3aamsh7f15463cc4a07f8p196cccjsn478bcd806c11',
     'X-RapidAPI-Host': 'cars-by-api-ninjas.p.rapidapi.com'
 
     }
 
     try{
 
-        const results = await axios.get("https://cars-by-api-ninjas.p.rapidapi.com/v1/cars",{
-        headers : headers,
-        params : carFilter
-        
+        const results = await axios.get(`https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${make}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,{
+        headers : headers
             }
         )
 
@@ -52,9 +52,6 @@ export const calculateRent = (city_mpg: number, year : number)=>{
 }
 
 export const generateCarImageUrl = (car: car, angle?: string) => {
-
-    
-
     const url = new URL("https://cdn.imagin.studio/getimage");
     const { make, model, year } = car;
   

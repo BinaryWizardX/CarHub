@@ -16,6 +16,7 @@ type Props = {
 function CarCard({carInstance, onViewDetailsClick}: Props) {
 
     const {city_mpg, year, make, model, transmission, drive} = carInstance;
+    
 
     const rent = calculateRent(city_mpg,year);
 
@@ -41,7 +42,7 @@ function CarCard({carInstance, onViewDetailsClick}: Props) {
             </p>
 
             <div className='relative w-full h-40 my-3 object-contain '>
-                <Image src={generateCarImageUrl(carInstance)} alt='car-image'fill priority className='object-contain'/>
+            <Image src={generateCarImageUrl(carInstance,'29')} alt='car model' layout='fill' objectFit='contain'  priority className='object-contain' />
             </div>
             <div className='main-div'>
                 <div className='w-full flex card-first-div '>

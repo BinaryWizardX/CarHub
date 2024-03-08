@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation';
 function  SearchBar() {
 
   
-  const[Manufacturer, setManufacturer] = useState('')
-  const[modal, setModal] = useState('')
+  const[make, setManufacturer] = useState('')
+  const[model, setModel] = useState('')
 
   const router = useRouter()
 
@@ -15,37 +15,40 @@ function  SearchBar() {
 
     event.preventDefault();
 
-     if(Manufacturer === "" && modal === ""){
+     if(make === "" && model === ""){
       alert("Some of the fields are missing. Try again");
      }
 
-     updateSearchParameters(Manufacturer.toLowerCase(), modal.toLowerCase())
+     updateSearchParameters(make.toLowerCase(), model.toLowerCase())
      
 
   }
-  const updateSearchParameters = (Manufacturer : string, modal : string)=>{
+  const updateSearchParameters = (make : string, model : string)=>{
 
     const SearchParams = new URLSearchParams(window.location.search)
 
     
-    if(Manufacturer){
-      SearchParams.set('Manufacturer' , Manufacturer)
+    if(make){
+      SearchParams.set('make' , make)
       
     }
     else{
-      SearchParams.delete('Manufacturer')
+      SearchParams.delete('make')
     }
 
-    if(modal){
-      SearchParams.set('modal', modal);
+    if(model){
+      SearchParams.set('model', model);
     }
     else{
-      SearchParams.delete('modal')
+      SearchParams.delete('model')
     }
 
   const newPathname = `${window.location.pathname}?${SearchParams.toString()}`;
 
     router.push(newPathname);
+
+    setManufacturer('')
+    setModel('')
 
     
 
@@ -72,7 +75,7 @@ function  SearchBar() {
             className=' bg-transparent focus:outline-none text-gray-600 w-80 max-[760px]:max-w-72'
             type='text'
             placeholder='Volkswagen...'
-            value={Manufacturer}
+            value={make}
             onChange={(e)=>{
               setManufacturer(e.target.value)
               
@@ -109,9 +112,9 @@ function  SearchBar() {
               className='bg-transparent w-80 focus:outline-none text-gray-600 max-[760px]:max-w-72'
               type='text'
               placeholder='Tiguan...'
-              value={modal}
+              value={model}
               onChange={(e)=>{
-                setModal(e.target.value)
+                setModel(e.target.value)
               }}
               />
               <Image

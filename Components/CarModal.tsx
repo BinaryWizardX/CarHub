@@ -33,7 +33,7 @@ function CarModal({ismodalOpen, carDetails, closeModal}: Props) {
                         
                        <div className=' mb-3 w-full bg-[url("/images/pattern.png")] bg-center bg-cover h-40 rounded-md'>
 
-                            <Image src={generateCarImageUrl(carDetails)} width={250} height={250} alt='car-image' className='mx-auto'/>
+                            <Image src={generateCarImageUrl(carDetails,'29')} width={250} height={250} alt='car-image' className='mx-auto'/>
 
                        </div>
                        <button className='absolute top-2 right-2 bg-slate-100 rounded-full p-1'
