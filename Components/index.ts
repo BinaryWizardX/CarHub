@@ -7,6 +7,7 @@ import CarList from "./CarList"
 import CarCard from "./CarCard"
 import CarDetails from "./CarDetails"
 import CarModal from "./CarModal"
+import ShowMore from "./ShowMore"
 
 export {
     NavBar,
@@ -18,4 +19,5 @@ export {
     CarCard,
     CarDetails,
     CarModal,
+    ShowMore,
 }

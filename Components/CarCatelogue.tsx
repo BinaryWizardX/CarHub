@@ -57,8 +57,8 @@ function CarCatelogue() {
 
             <div className='custom-filters flex justify-between gap-5 max-[1200px]:flex-col'>
 
-                <CustomFilters menuName = "menu1" menuList ={dropDownMenu1} />
-                <CustomFilters menuName='menu2' menuList={dropDownMenu2}/>,
+                <CustomFilters menuName = "fuel" menuList ={dropDownMenu1} />
+                <CustomFilters menuName='year' menuList={dropDownMenu2}/>,
 
 
 

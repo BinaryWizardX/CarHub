@@ -34,3 +34,8 @@ export type car = {
   transmission: string;
   year: number;
 }
+
+export type ShowMoreProps = {
+  pageNumber: number;
+  isNext: boolean;
+}
